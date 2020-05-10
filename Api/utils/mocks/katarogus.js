@@ -1,0 +1,75 @@
+const katarogusMock = [{
+  "id": "0d3f7941-f82a-4104-905a-1e8b3bd3055f",
+  "userId": "d9c9b99c-f950-4fdf-a56e-b5dc703a8f69",
+  "Name": "Camimbo",
+  "LogoSource": "http://dummyimage.com/236x141.jpg/dddddd/000000",
+  "isActive": true,
+  "createdAt": "10/12/2019"
+}, {
+  "id": "aefe1132-c6f8-4545-9169-8527597cc594",
+  "userId": "74a0b1fb-50e2-41de-9869-a7d427b4105c",
+  "Name": "Feedbug",
+  "LogoSource": "http://dummyimage.com/220x166.jpg/ff4444/ffffff",
+  "isActive": false,
+  "createdAt": "7/14/2019"
+}, {
+  "id": "bc76d9b5-c516-4a5d-9e44-3a5c268e6628",
+  "userId": "a24f8381-e9da-44d4-8704-afd3a3e6f3eb",
+  "Name": "Skyba",
+  "LogoSource": "http://dummyimage.com/147x242.bmp/cc0000/ffffff",
+  "isActive": false,
+  "createdAt": "9/2/2019"
+}, {
+  "id": "c0800675-b70d-4889-871c-dd7cc43968a2",
+  "userId": "88650a6f-1508-4a22-b3b6-29a475d9aef1",
+  "Name": "Skiba",
+  "LogoSource": "http://dummyimage.com/212x216.jpg/cc0000/ffffff",
+  "isActive": false,
+  "createdAt": "1/21/2020"
+}, {
+  "id": "58b7d4f1-8139-455f-9bea-c6fe53858707",
+  "userId": "98b9fdf7-c274-43f1-9bf9-d6a67a4fe8bd",
+  "Name": "Aimbo",
+  "LogoSource": "http://dummyimage.com/161x144.jpg/ff4444/ffffff",
+  "isActive": true,
+  "createdAt": "3/12/2020"
+}, {
+  "id": "5fa30eaa-f290-4937-8922-49fde3a0c964",
+  "userId": "070b4214-dce8-4489-8b12-6ccaa8bdef39",
+  "Name": "Midel",
+  "LogoSource": "http://dummyimage.com/108x162.jpg/5fa2dd/ffffff",
+  "isActive": false,
+  "createdAt": "4/15/2020"
+}, {
+  "id": "7cf0f602-1ef2-494d-ae93-a0ff23de9c87",
+  "userId": "24fb6b1c-6c27-4f70-9677-b0b18c33f245",
+  "Name": "Tagchat",
+  "LogoSource": "http://dummyimage.com/103x173.jpg/cc0000/ffffff",
+  "isActive": true,
+  "createdAt": "6/6/2019"
+}, {
+  "id": "5e2a958c-f492-4a39-a6ba-873789f3ba4d",
+  "userId": "f7915d1f-eeea-4d9b-8887-118c99585085",
+  "Name": "JumpXS",
+  "LogoSource": "http://dummyimage.com/149x110.jpg/5fa2dd/ffffff",
+  "isActive": false,
+  "createdAt": "1/14/2020"
+}, {
+  "id": "bc2ca033-518c-4ddd-91d0-c09754c27855",
+  "userId": "72b400a3-6ba7-43f2-aa97-6dea8b8ae8cc",
+  "Name": "Roodel",
+  "LogoSource": "http://dummyimage.com/208x158.bmp/cc0000/ffffff",
+  "isActive": false,
+  "createdAt": "5/17/2019"
+}, {
+  "id": "f3e2887a-e3d0-4b40-a654-3ebf0f85c3d7",
+  "userId": "28370eb7-54a9-4961-bdc7-6d67318d72d3",
+  "Name": "Kwilith",
+  "LogoSource": "http://dummyimage.com/231x171.jpg/5fa2dd/ffffff",
+  "isActive": true,
+  "createdAt": "2/18/2020"
+}];
+
+module.exports = {
+  katarogusMock
+};

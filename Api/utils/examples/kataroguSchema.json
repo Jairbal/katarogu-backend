@@ -1,0 +1,32 @@
+{
+  "userId": "5eb5a191b4ad0217b97dbc3b",
+  "name": "Feedbug",
+  "logoSource": "http://dummyimage.com/hhhh.jpg/ff4444/ffffff",
+  "isActive": true,
+  "physicalStore": true,
+  "direction": {
+  	"province": "Santo Domingo De Los Tsachilas",
+  	"city": "Santo Domingo",
+  	"mainStreet": "3 de Julio",
+  	"secondaryStreet": "Ya esa es"
+  },
+  "attention": "Normal",
+  "schedule": {
+  	"since": "9 AM",
+  	"until": "1 PM"
+  },
+  "contact": {
+  	"whatsapp": {
+  		"name": "Pepito",
+  		"number": "+593986618686"
+  	},
+  	"facebook": {
+  		"username": "Jair Balcazar Cobeña",
+  		"url": "https://www.facebook.com/jbalcazar.jb"
+  	},
+  	"instagram": {
+  		"username": "@JBalcazar.jb"
+  	}
+  },
+  "createdAt": "{{date}}"
+}
