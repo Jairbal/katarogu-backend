@@ -20,7 +20,7 @@ const kataroguInstagramUsernameSchema = joi.string();
 const kataroguCreatedAtSchema = joi.date();
 
 const createKataroguSchema = {
-  userId: userIdSchema.required(),
+  //userId: userIdSchema.required(),
   name: kataroguNameSchema.required(),
   logoSource: kataroguLogoSourceSchema,
   isActive: kataroguIsActiveSchema.required(),
@@ -35,6 +35,39 @@ const createKataroguSchema = {
   schedule: {
     since: kataroguSinceSchema,
     until: kataroguUntilSchema,
+  },
+  contact: {
+    whatsapp: {
+      name: kataroguWhatsappNameSchema,
+      number: kataroguWhatsappNumberSchema.required(),
+    },
+    facebook: {
+      username: kataroguFacebookUsernameSchema,
+      url: kataroguFacebookUrlSchema,
+    },
+    instagram: {
+      username: kataroguInstagramUsernameSchema,
+    },
+  },
+  createdAt: kataroguCreatedAtSchema.required(),
+};
+
+const createCompleteKataroguSchema = {
+  //userId: userIdSchema.required(),
+  name: kataroguNameSchema.required(),
+  logoSource: kataroguLogoSourceSchema,
+  isActive: kataroguIsActiveSchema.required(),
+  physicalStore: kataroguPhysicalStoreSchema.required(),
+  direction: {
+    province: kataroguProvinceSchema.required(),
+    city: kataroguCitySchema.required(),
+    mainStreet: kataroguMainStreetSchema.required(),
+    secondaryStreet: kataroguSecondaryStreetSchema.required(),
+  },
+  attention: kataroguAttentionSchema.required(),
+  schedule: {
+    since: kataroguSinceSchema.required(),
+    until: kataroguUntilSchema.required(),
   },
   contact: {
     whatsapp: {
@@ -88,5 +121,6 @@ const updateKataroguSchema = {
 module.exports = {
   kataroguIdSchema,
   createKataroguSchema,
+  createCompleteKataroguSchema,
   updateKataroguSchema,
 };

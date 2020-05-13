@@ -13,21 +13,33 @@ class UsersService {
   }
 
   async createUser({ user }) {
-    const { email, password, nameCompany, isAdmin, createdKatarogu, createdAt } = user;
+
+    const { email, password, nameCompany } = user;
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const createUserId = await this.mongoDB.create(this.collection, {
       email,
       password: hashedPassword,
       nameCompany,
-      isAdmin,
-      createdKatarogu,
-      createdAt
+      isAdmin: false,
+      createdKatarogu: false,
+      createdAt: new Date().toJSON()
     })
     return createUserId;
   };
 
   async updateUser({ userId, user }) {
+    const existsUser = await this.mongoDB.get(this.collection, userId );
+    console.log(existsUser)
+    if(!existsUser){
+      return null;
+    }
+
+    if(user.password){
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+    }
     const updatedUserId = await this.mongoDB.update(this.collection, userId, user);
     return updatedUserId;
   }

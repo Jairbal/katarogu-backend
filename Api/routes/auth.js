@@ -4,7 +4,7 @@ const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
-const validationHandler = require('../utils/middleware/validationHandler');
+const { validationHandler } = require('../utils/middleware/validationHandler');
 
 const { createUserSchema } = require('../utils/schemas/users');
 
@@ -20,19 +20,19 @@ function authApi(app) {
   const apiKeysService = new ApiKeysService();
   const usersService = new UsersService();
 
-  router.post('/sign-in', async function(req, res, next) {
+  router.post('/sign-in', async function (req, res, next) {
     const { apiKeyToken } = req.body;
 
     if (!apiKeyToken) {
       next(boom.unauthorized('apiKeyToken is required'));
     }
-    passport.authenticate('basic', function(error, user) {
+    passport.authenticate('basic', function (error, user) {
       try {
         if (error || !user) {
           next(boom.unauthorized());
         }
 
-        req.login(user, { session: false }, async function(error) {
+        req.login(user, { session: false }, async function (error) {
           if (error) {
             next(error);
           }
@@ -49,14 +49,16 @@ function authApi(app) {
             sub: id,
             nameCompany,
             email,
-            scopes: apiKey.scopes
+            scopes: apiKey.scopes,
           };
 
           const token = jwt.sign(payload, config.authJwtSecret, {
-            expiresIn: '15m'
+            expiresIn: '15m',
           });
 
-          return res.status(200).json({ token, user: { id, nameCompany, email } });
+          return res
+            .status(200)
+            .json({ token, user: { id, nameCompany, email } });
         });
       } catch (error) {
         next(error);
@@ -64,20 +66,33 @@ function authApi(app) {
     })(req, res, next);
   });
 
-  router.post('/sign-up', validationHandler(createUserSchema), async function(req, res, next) {
+  router.post('/sign-up', validationHandler(createUserSchema), async function (
+    req,
+    res,
+    next
+  ) {
     const { body: user } = req;
 
-    try{
-      const createdUserId = await usersService.createUser({ user });
+    try {
+      const existsUser = await usersService.getUser(user);
 
-      res.status(201).json({
-        data: createdUserId,
-        message: 'user created'
-      })
-    }catch(error){
+      if (existsUser) {
+        res.status(200).json({
+          data: null,
+          message: 'email in use',
+        });
+      } else {
+        const createdUserId = await usersService.createUser({ user });
+
+        res.status(201).json({
+          data: createdUserId,
+          message: 'user created',
+        });
+      }
+    } catch (error) {
       next(error);
     }
-  })
+  });
 }
 
 module.exports = authApi;

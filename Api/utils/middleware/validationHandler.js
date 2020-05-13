@@ -14,4 +14,21 @@ function validationHandler(schema, check = 'body') {
   }
 }
 
-module.exports = validationHandler;
+function validationHandlerKatarogu(schema1, schema2, check = 'body') {
+  return function(req, res, next) {
+    let error;
+    if(req.body.physicalStore){
+    error = validate(req[check], schema1);
+    }else {
+       error = validate(req[check], schema2);
+    }
+
+    error ? next(boom.badRequest(error)): next();
+  }
+}
+
+
+module.exports = {
+  validationHandler,
+  validationHandlerKatarogu
+};

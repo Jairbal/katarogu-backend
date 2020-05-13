@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 
 const ProductsServices = require('../services/products');
-const validationHandler = require('../utils/middleware/validationHandler');
+const { validationHandler } = require('../utils/middleware/validationHandler');
 const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
 
 const { kataroguIdSchema } = require('../utils/schemas/katarogu');

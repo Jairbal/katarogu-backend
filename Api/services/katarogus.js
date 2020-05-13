@@ -1,6 +1,6 @@
 const MongoLib = require('../lib/mongo');
 
-class katarogusService {
+class KatarogusService {
   constructor() {
     this.collection = 'katarogus';
     this.mongoDB = new MongoLib();
@@ -38,4 +38,4 @@ class katarogusService {
   }
 }
 
-module.exports = katarogusService;
+module.exports = KatarogusService;

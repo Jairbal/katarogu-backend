@@ -13,6 +13,7 @@ const { config } = require('./config/index');
 const authApi = require('./routes/auth');
 const katarogusApi = require('./routes/katarogus');
 const productsApi = require('./routes/products');
+const usersApi = require('./routes/users');
 
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middleware/errorHandlers');
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
@@ -23,9 +24,9 @@ const accessLogStream = rfs.createStream('access.log', {
 })
 
 // helmet - Encabezados http
-//app.use(helmet());
+app.use(helmet());
 //CORS
-//app.use(cors());
+app.use(cors());
 
 //Logger
 app.use(morgan('combined', { stream: accessLogStream }))
@@ -35,6 +36,7 @@ app.use(express.json());
 
 //Routes
 authApi(app);
+usersApi(app);
 katarogusApi(app);
 productsApi(app);
 
