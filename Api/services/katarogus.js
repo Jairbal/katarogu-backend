@@ -1,4 +1,4 @@
-const MongoLib = require('../lib/mongo');
+const {MongoLib, ObjectId} = require('../lib/mongo');
 
 class KatarogusService {
   constructor() {
@@ -7,8 +7,8 @@ class KatarogusService {
   }
 
   //OBTENER TODOS LOS KATAROGUS
-  async getKatarogus({ tags }) {
-    const query = tags && { tags: { $in: tags }};
+  async getKatarogus({ userId }) {
+    const query = userId && { userId: ObjectId(userId) };
     const katarogus = await this.mongoDB.getAll(this.collection, query);
     return katarogus || [];
   }
@@ -21,19 +21,35 @@ class KatarogusService {
 
   //CREAR UN KATAROGU
   async createKatarogu(katarogu) {
-    const createdKataroguId = await this.mongoDB.create(this.collection, katarogu);
+    const createdKataroguId = await this.mongoDB.create(
+      this.collection,
+      katarogu
+    );
     return createdKataroguId;
   }
 
   //ACTUALIZAR UN KATAROGU
   async updateKatarogu({ kataroguId, katarogu } = {}) {
-    const updatedKataroguId = await this.mongoDB.update(this.collection, kataroguId, katarogu);
+    const updatedKataroguId = await this.mongoDB.update(
+      this.collection,
+      kataroguId,
+      katarogu
+    );
     return updatedKataroguId;
   }
 
   //ELIMINAR UN KATAROGU
   async deleteKatarogu(kataroguId) {
-    const deletedKataroguId = await this.mongoDB.delete(this.collection, kataroguId);
+    const ProductsService = require('./products');
+    const productsService = new ProductsService();
+    const products = await productsService.getProducts({ kataroguId });
+    products.forEach(async (element) => {
+      await productsService.deleteProduct({ productId: element._id });
+    });
+    const deletedKataroguId = await this.mongoDB.delete(
+      this.collection,
+      kataroguId
+    );
     return deletedKataroguId;
   }
 }

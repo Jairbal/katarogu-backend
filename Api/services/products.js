@@ -1,4 +1,5 @@
-const MongoLib = require('../lib/mongo');
+const {MongoLib, ObjectId} = require('../lib/mongo');
+const KatarogusService = require('./katarogus');
 
 class ProductsService {
   constructor() {
@@ -7,20 +8,21 @@ class ProductsService {
   };
 
   async getProducts({ kataroguId }) {
-    const query = kataroguId && { kataroguId };
+    const query = kataroguId && { kataroguId: ObjectId(kataroguId) };
     const products = await this.mongoDB.getAll(this.collection, query);
-
     return products || [];
   };
 
-  async createProduct({ product }) {
+  async createProduct({ product, userId }) {
+    const katarogusService = new KatarogusService();
+    const kataroguUser = await katarogusService.getKatarogus({userId: userId});
+    const kataroguUserId = kataroguUser[0]._id;
+    product = { ...product, kataroguId: kataroguUserId };  
     const createdProductId = await this.mongoDB.create(this.collection, product);
     return createdProductId;
   };
 
   async updateKatarogu({ productId, product } = {}) {
-    console.log(productId)
-    console.log(product)
     const updatedProductId = await this.mongoDB.update(this.collection, productId, product);
     return updatedProductId;
   }

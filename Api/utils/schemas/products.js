@@ -9,7 +9,7 @@ const productCodSchema = joi.number();
 const productCreatedAtSchema = joi.date();
 
 const createProductSchema = {
-  kataroguId: kataroguIdSchema.required(),
+  //kataroguId: kataroguIdSchema.required(),
   name: productNameSchema.required(),
   description: productDescriptionSchema.required(),
   price: productPriceSchema.required(),

@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const UsersService = require('../services/users');
+const KatarogusService = require('../services/katarogus');
 
 const { validationHandler } = require('../utils/middleware/validationHandler');
 const { userIdSchema, updateUserSchema } = require('../utils/schemas/users');
@@ -42,6 +43,30 @@ function usersApi(app) {
       } catch (error) {
         next(error);
       }
+    }
+  );
+
+  router.delete(
+    '/:userId',
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:users']),
+    validationHandler({ userId: userIdSchema }, 'params'),
+    async function (req, res, next) {
+      const { userId } = req.params;
+
+      const katarogusService = new KatarogusService();
+
+      const deletedUserId = await usersService.deleteUser(userId);
+      const kataroguUser = await katarogusService.getKatarogus({userId: userId});
+      const kataroguDeletedId = await katarogusService.deleteKatarogu(kataroguUser[0]._id);
+
+      res.status(200).json({
+        data: {
+          deletedUserId,
+          kataroguDeletedId
+        },
+        message: 'user, katarogu and products deleted'
+      });
     }
   );
 }

@@ -68,4 +68,4 @@ class MongoLib {
   }
 }
 
-module.exports = MongoLib;
+module.exports = {MongoLib, ObjectId};

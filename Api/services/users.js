@@ -1,4 +1,4 @@
-const MongoLib = require('../lib/mongo');
+const { MongoLib } = require('../lib/mongo');
 const bcrypt = require('bcrypt');
 
 class UsersService {
@@ -31,7 +31,6 @@ class UsersService {
 
   async updateUser({ userId, user }) {
     const existsUser = await this.mongoDB.get(this.collection, userId );
-    console.log(existsUser)
     if(!existsUser){
       return null;
     }
@@ -50,4 +49,4 @@ class UsersService {
   }
 }
 
-module. exports = UsersService;
+module.exports = UsersService;

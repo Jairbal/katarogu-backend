@@ -51,13 +51,18 @@ app.post("/auth/sign-in", async function(req, res, next) {
 app.post("/auth/sign-up", async function (req, res, next) {
   const { body: user } = req;
   try {
-    await axios({
+    const data = await axios({
       url: `${config.apiUrl}/api/auth/sign-up`,
       method: "post",
       data: user,
     });
 
-    res.status(201).json({ message: "user created" });
+    if(data.data.message === 'email in use'){
+      res.status(200).json({ message: "El email ya está en uso" });
+    } else {
+      res.status(201).json({ message: "user created" });
+    }
+
   } catch (error) {
     next(error);
   }

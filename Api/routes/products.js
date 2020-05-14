@@ -26,7 +26,6 @@ function productsApi(app) {
     validationHandler({ kataroguId: kataroguIdSchema }),
     async function (req, res, next) {
       const { kataroguId } = req.query;
-
       try {
         const products = await productsServices.getProducts({ kataroguId });
 
@@ -47,10 +46,10 @@ function productsApi(app) {
     validationHandler(createProductSchema),
     async function (req, res, next) {
       const { body: product } = req;
-
+      const { _id } = req.user;
       try {
         const createdProductId = await productsServices.createProduct({
-          product,
+          product, userId: _id
         });
 
         res.status(201).json({
