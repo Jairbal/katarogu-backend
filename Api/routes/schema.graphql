@@ -70,9 +70,11 @@ type Product {
 
 type Query {
   "Devuelve un Katarogu"
-  getKatarogu(id: ID!): Katarogu
+  getKatarogu(kataroguId: ID!): Katarogu
   "Devuelve los productos de un katarogu"
-  getProducts(id: ID!): [Product]
+  getProducts(): [Product]
+  "Devuelve un producto"
+  getProduct(productId: ID!): Product
 }
 
 input UserInput {
