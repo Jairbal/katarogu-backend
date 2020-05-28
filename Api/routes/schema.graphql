@@ -72,7 +72,7 @@ type Query {
   "Devuelve un Katarogu"
   getKatarogu(kataroguId: ID!): Katarogu
   "Devuelve los productos de un katarogu"
-  getProducts(): [Product]
+  getProducts(kataroguId: ID!): [Product]
   "Devuelve un producto"
   getProduct(productId: ID!): Product
 }
