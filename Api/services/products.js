@@ -13,6 +13,11 @@ class ProductsService {
     return products || [];
   };
 
+  async getProduct(productId) {
+    const product = await this.mongoDB.get(this.collection, productId);
+    return product || {};
+  }
+
   async createProduct({ product, userId }) {
     const katarogusService = new KatarogusService();
     const kataroguUser = await katarogusService.getKatarogus({userId: userId});

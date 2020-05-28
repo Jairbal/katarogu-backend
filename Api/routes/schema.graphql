@@ -1,0 +1,180 @@
+type User {
+  _id: ID!
+  email: String!
+  password: String!
+  nameCompany: String!
+  createdAt: String!
+}
+
+enum Attention {
+  ftof
+  part
+  nel
+}
+
+type Direction {
+  province: String
+  city: String
+  mainStreet: String
+  secondaryStreet: String
+}
+
+type Schedule {
+  since: String
+  until: String
+}
+
+type Contact {
+  whatsapp: Whatsapp
+  facebook: Facebook
+  instagram: Instagram
+}
+
+type Whatsapp {
+  name: String
+  number: String
+}
+
+type Facebook {
+  username: String
+  url: String
+}
+
+type Instagram {
+  username: String
+}
+
+type Katarogu {
+  _id: ID! 
+  userId: ID!
+  name: String!
+  logoSource: String!
+  isActive: Boolean!
+  physicalStore: Boolean!
+  direction: Direction
+  attention: Attention
+  schedule: Schedule
+  contact: Contact
+  createdAt: String!
+}
+
+type Product {
+  _id: ID!
+  kataroguId: ID!
+  name: String!
+  description: String!
+  price: String!
+  cod: String!
+  createdAt: String!
+}
+
+type Query {
+  "Devuelve un Katarogu"
+  getKatarogu(id: ID!): Katarogu
+  "Devuelve los productos de un katarogu"
+  getProducts(id: ID!): [Product]
+}
+
+input UserInput {
+  email: String!
+  password: String!
+  nameCompany: String!
+}
+
+input UserUpdateInput {
+  email: String
+  password: String
+  nameCompany: String
+}
+
+input DirectionInput {
+  province: String
+  city: String
+  mainStreet: String
+  secondaryStreet: String
+}
+
+input ScheduleInput {
+  since: String
+  until: String
+}
+
+input ContactInput {
+  whatsapp: WhatsappInput
+  facebook: FacebookInput
+  instagram: InstagramInput
+}
+
+input WhatsappInput {
+  name: String
+  number: String
+}
+
+input FacebookInput {
+  username: String
+  url: String
+}
+
+input InstagramInput {
+  username: String
+}
+
+input KataroguInput {
+  userId: ID!
+  name: String!
+  logoSource: String
+  isActive: Boolean!
+  physicalStore: Boolean!
+  direction: DirectionInput
+  attention: Attention
+  schedule: ScheduleInput
+  contact: ContactInput
+}
+
+input KataroguUpdateInput {
+  name: String
+  logoSource: String
+  isActive: Boolean
+  physicalStore: Boolean
+  direction: DirectionInput
+  attention: Attention
+  schedule: ScheduleInput
+  contact: ContactInput
+}
+
+input ProductInput {
+  kataroguId: ID!
+  name: String!
+  description: String!
+  price: String!
+  cod: String!
+  createdAt: String!
+}
+
+input ProductUpdateInput {
+  name: String
+  description: String
+  price: String
+  cod: String
+}
+
+type Mutation {
+  "Crea un usuario"
+  createUser(input: UserInput!): User
+  "Actualiza un usuario"
+  updateUser(input: UserUpdateInput): User
+  "Elimina un usuario"
+  deleteUser(input: ID!): ID
+  "Crea un Katarogu"
+  createKatarogu(katarogu: KataroguInput!): Katarogu
+  "Actualiza un Katarogu"
+  updateKatarogu(katarogu: KataroguUpdateInput, kataroguId: ID!): Katarogu
+  "Elimina un Katarogu"
+  deleteKatarogu(kataroguId: ID!): ID
+  "Crea un producto"
+  createProduct(product: ProductInput!): Product
+  "Actualiza un producto"
+  updateProduct(product: ProductUpdateInput): Product
+  "Elimina un producto"
+  deleteProduct(productId: ID!): ID
+}
